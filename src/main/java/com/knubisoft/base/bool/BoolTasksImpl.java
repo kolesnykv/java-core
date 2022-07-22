@@ -4,16 +4,23 @@ public class BoolTasksImpl implements BoolTasks {
 
     @Override
     public Boolean isTrueAutobox(boolean value) {
-        return null;
+        Boolean bool = value;
+        if (bool) return bool;
+        return false;
     }
 
     @Override
     public Boolean isFalseAutobox(boolean value) {
-        return null;
+        Boolean bool = value;
+        if (!bool) return bool;
+        return true;
     }
 
     @Override
     public boolean isTrueUnbox(Boolean value) {
+        if(value == null) return false;
+        boolean bool = value;
+        if (bool) return bool;
         return false;
     }
 
@@ -24,7 +31,11 @@ public class BoolTasksImpl implements BoolTasks {
 
     @Override
     public boolean andFunction(int digit, String string) {
-        return false;
+        try {
+            return digit == Integer.valueOf(string);
+        }catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
