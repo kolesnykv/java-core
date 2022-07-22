@@ -94,6 +94,14 @@ public class NumbersTasksImpl implements NumbersTasks {
 
     @Override
     public boolean isAutomorphic(int number) {
-        return false;
+        int count=0;
+        long square = (long) number*number;
+        int temp = number;
+        while(temp>0)
+        {
+            count++;
+            temp/=10;
+        }
+        return number == (int) (square%(Math.pow(10, count)));
     }
 }
