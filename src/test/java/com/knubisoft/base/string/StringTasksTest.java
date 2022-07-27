@@ -26,7 +26,7 @@ public class StringTasksTest {
     @Test
     public void insertStringInMiddleSuccessful() {
         assertEquals("He, Worldllo", instance.insertStringInMiddle("Hello", ", World"));
-        assertEquals("St. \n" +
+        assertEquals("St. \r\n" +
                         " Andersan 7/10Tomeu",
                 instance.insertStringInMiddle("St. Tomeu", System.lineSeparator() + " Andersan 7/10"));
     }
@@ -151,8 +151,8 @@ public class StringTasksTest {
     @Test
     public void toCamelCaseSuccessful() {
         assertEquals("theStealthWarrior", instance.toCamelCase("the-stealth-warrior"));
-        assertEquals("theStealthWarrior", instance.toCamelCase("The_Stealth_Warrior"));
-        assertEquals("theStealthWarrior", instance.toCamelCase("The stealth warrior"));
+        assertEquals("theStealthWarrior", instance.toCamelCase("the_Stealth_Warrior"));
+        assertEquals("theStealthWarrior", instance.toCamelCase("the stealth warrior"));
     }
 
     @Test
