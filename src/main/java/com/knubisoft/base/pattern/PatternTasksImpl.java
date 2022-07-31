@@ -1,64 +1,94 @@
 package com.knubisoft.base.pattern;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PatternTasksImpl implements PatternTasks {
 
     @Override
-    public boolean haveSetOfCharacters(String text) {
-        return false;
+    public boolean haveSetOfCharacters(String text)
+    {
+        if(text==null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return Pattern.matches("^[a-zA-Z\\d]+$",text);
     }
 
     @Override
     public String matchByCharacters(String text) {
-        return null;
+        return text.matches("pq*") ? "Found a match!" : "Not matched!";
     }
 
     @Override
     public String matchStartAndEnd(String text) {
-        return null;
+        if (text == null)
+            throw new IllegalArgumentException();
+        Pattern pattern = Pattern.compile("\\Bg\\B");
+        Matcher m = pattern.matcher(text);
+        return m.find() ? "Found a match!" : "Not matched!";
     }
 
     @Override
     public String matchIpAddress(String text) {
-        return null;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.replaceAll("(?<=^|\\.)0+(?!\\.|$)","");
     }
 
     @Override
     public String matchVowels(String text) {
-        return null;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.replaceAll("[aeoiuAEOIU]", "");
     }
 
     @Override
     public boolean validatePIN(String text) {
-        return false;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.matches("\\d{4}|\\d{6}|\\d{8}");
     }
 
     @Override
     public String divideDigit(int digit) {
-        return null;
+        return String.format("%,d",digit).replaceAll(",", "#");
     }
 
     @Override
     public String removeAllNonAlphanumericCharacters(String text) {
-        return null;
+        if (text == null)
+            throw new RuntimeException();
+        return text.replaceAll("\\W", "");
     }
 
     @Override
     public boolean validatePhoneNumber(String text) {
-        return false;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}");
     }
 
     @Override
     public String getLastVowelsByConstraint(String text, int n) {
+        if (text == null || text.trim().isEmpty() || n <= 0)
+            throw new IllegalArgumentException();
+        if (n <= text.replaceAll("[^aeiou]","").length()) {
+            return text.replaceAll("[^aeiou]","")
+                    .substring(text.replaceAll("[^aeiou]","").length() - n);
+        }
         return null;
     }
 
     @Override
     public boolean isMathematicalExpression(String text) {
-        return false;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.matches("((?:(?:^|[-+_*/])\\s*-?\\d+(\\.\\d+)?(?:[eE][+-]?\\d+)?\\s*)+$)");
     }
 
     @Override
     public String insertDash(String text) {
-        return null;
+        if (text == null || text.trim().isEmpty())
+            throw new IllegalArgumentException();
+        return text.replaceAll("(?<=[A-Z])(?=[a-z])", "-");
     }
 }
