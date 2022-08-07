@@ -55,27 +55,15 @@ public class StringTasksImpl implements StringTasks {
 
     @Override
     public String uniqueCharacters(String str) {
-//        return Chars.asList(str.toCharArray())
-//                .stream()
-//                .distinct()
-//                .map(x -> x.toString())
-//                .collect(Collectors.joining());
         if (str==null)
             throw new IllegalArgumentException();
-        LinkedList<String> list = new LinkedList<>();
-        for (String i : str.split("")){
-            if (list.contains(i.toLowerCase()))
-                list.remove(i.toLowerCase());
-            else if (list.contains(i.toUpperCase()))
-                list.remove(i.toUpperCase());
-            else list.add(i);
-
+        ArrayList<String> list =new ArrayList<>(Arrays.asList(str.split("")));
+        String result ="";
+        for (String s: list) {
+            if((Collections.frequency(list,s.toLowerCase())
+                    +Collections.frequency(list,s.toUpperCase()))==1) result+=s;
         }
-        String unique = "";
-        for (String i: list) {
-            unique+=i;
-        }
-        return unique;
+        return result;
     }
 
     @Override

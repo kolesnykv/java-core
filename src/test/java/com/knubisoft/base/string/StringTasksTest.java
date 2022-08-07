@@ -123,6 +123,7 @@ public class StringTasksTest {
         assertEquals("string", instance.uniqueCharacters("string"));
         assertEquals("o", instance.uniqueCharacters("Bob"));
         assertEquals("", instance.uniqueCharacters(""));
+        assertEquals("g", instance.uniqueCharacters("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"));
     }
 
     @Test
