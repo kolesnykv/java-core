@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
  */
 public interface FieldUtils {
 
-    Field getField(Class<?> cls, String fieldName);
+    Field getField(Class<?> cls, String fieldName) throws NoSuchFieldException;
 
     Field getField(Class<?> cls, String fieldName, boolean forceAccess);
 

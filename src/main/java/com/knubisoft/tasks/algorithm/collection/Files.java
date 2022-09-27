@@ -54,7 +54,7 @@ public interface Files {
      * @throws NullPointerException if any of the given {@code File}s are {@code null}.
      * @throws IllegalArgumentException if the source or destination is invalid.
      * @throws FileNotFoundException if the source does not exist.
-     * @throws IOException if an error occurs or setting the last-modified time didn't succeeded.
+     * @throws IOException if an error occurs or setting the last-modified time didn't succeed.
      */
     void copyDirectoryToDirectory(final File sourceDir, final File destinationDir) throws IOException;
 
