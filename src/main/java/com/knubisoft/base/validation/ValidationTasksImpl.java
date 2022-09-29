@@ -16,20 +16,19 @@ public class ValidationTasksImpl implements ValidationTasks {
     @Override
     public void validate(Object instance) {
         Annotation[] annotations = instance.getClass().getDeclaredAnnotations();
+        Map<Field, String> resultMap = new LinkedHashMap<>();
         for (Field f: instance.getClass().getDeclaredFields()) {
-            checkForAnnotation(f, annotations, instance);
-
+            resultMap.put(f,checkForAnnotation(f, annotations, instance));
         }
-
-
     }
 
-    private void checkForAnnotation(Field f, Annotation[] annotations, Object instance) {
+    private String checkForAnnotation(Field f, Annotation[] annotations, Object instance) {
         for (Annotation annotation: annotations) {
             if(f.isAnnotationPresent(annotation.annotationType())) {
-                validateField(f, annotation.annotationType(),instance);
+                return validateField(f, annotation.annotationType(),instance) ? "valid" : "not valid";
             }
         }
+        return "No restrictions to field";
     }
 
     private boolean validateField(Field f, Class<? extends Annotation> annotationType, Object instance) {

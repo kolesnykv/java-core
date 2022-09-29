@@ -14,8 +14,9 @@ public class LuckyTicketImpl implements LuckyTicket {
         }
 
     }
+
     static int palindrome(int number, int temp) {
-        if(number == 0){
+        if (number == 0) {
             return temp;
         }
         temp = (temp * 10) + (number % 10);

@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FieldUtilsImpl implements FieldUtils{
+public class FieldUtilsImpl implements FieldUtils {
     @Override
     public Field getField(Class<?> cls, String fieldName) throws NoSuchFieldException {
         if (fieldName.isBlank() || cls == null) {
@@ -16,10 +16,6 @@ public class FieldUtilsImpl implements FieldUtils{
         return cls.getField(fieldName);
     }
 
-    @Override
-    public Field getField(Class<?> cls, String fieldName, boolean forceAccess) {
-        return null;
-    }
 
     @SneakyThrows
     @Override
@@ -32,7 +28,7 @@ public class FieldUtilsImpl implements FieldUtils{
 
     @Override
     public Field[] getAllFields(Class<?> cls) {
-        if(cls == null) {
+        if (cls == null) {
             throw new IllegalArgumentException();
         }
         return cls.getDeclaredFields();
@@ -41,10 +37,10 @@ public class FieldUtilsImpl implements FieldUtils{
     @Override
     public Field[] getFieldsWithAnnotation(Class<?> cls, Class<? extends Annotation> annotationCls) {
         List<Field> fieldsWithAnnotation = new ArrayList<>();
-        if(cls == null || annotationCls == null) {
+        if (cls == null || annotationCls == null) {
             throw new IllegalArgumentException();
         }
-        for (Field f: cls.getDeclaredFields()) {
+        for (Field f : cls.getDeclaredFields()) {
             if (f.isAnnotationPresent(annotationCls)) {
                 fieldsWithAnnotation.add(f);
             }

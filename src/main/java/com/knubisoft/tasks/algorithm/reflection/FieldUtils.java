@@ -15,7 +15,6 @@ public interface FieldUtils {
 
     Field getField(Class<?> cls, String fieldName) throws NoSuchFieldException;
 
-    Field getField(Class<?> cls, String fieldName, boolean forceAccess);
 
     Field getDeclaredField(Class<?> cls, String fieldName);
 
