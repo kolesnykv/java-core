@@ -62,6 +62,7 @@ public class FilesImpl implements Files {
         if (fileName == null) {
             throw new IllegalArgumentException();
         }
+
         return Paths.get(fileName).normalize().toString();
     }
 
