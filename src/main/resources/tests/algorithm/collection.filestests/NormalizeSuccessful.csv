@@ -1,0 +1,11 @@
+input,expected
+/foo//,/foo/
+/foo/./,/foo/
+/foo/../bar,/bar
+/foo/../bar/,/bar/
+/foo/../bar/../baz,/baz
+//foo//./bar,/foo/bar
+foo/bar/..,foo/
+foo/../bar,bar
+//server/foo/../bar,/server/bar
+~/foo/../bar/,/bar/

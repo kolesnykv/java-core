@@ -1,23 +1,39 @@
 package com.knubisoft.tasks.algorithm.search;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SearchImplTest {
-    private final Search search = new SearchImpl();
+    private final Search instance = new SearchImpl();
+
+    private static long[] getInputArray(String array) {
+        return ArrayUtils.toPrimitive(Stream.of(array.split("")).map(Long::parseLong).toArray(Long[]::new));
+    }
 
     @Test
-    void searchPass() {
-        long[] array = {1, 3, 5, 6, 7, 9, 10, 11};
-        assertEquals(2, search.binarySearch(array, 5L));
-        assertEquals(3, search.binarySearch(array, 6L));
-        assertEquals(7, search.binarySearch(array, 11L));
-        assertEquals(-1, search.binarySearch(array, 12L));
-        assertEquals(-1, search.binarySearch(array, 0L));
+    public void searchTestFail() {
+        assertThrows(NullPointerException.class, () -> instance.binarySearch(null, 5));
+        assertThrows(IllegalArgumentException.class, () -> instance.binarySearch(new long[0], 5));
     }
-    @Test
-    void searchFail() {
-        assertThrows(IllegalArgumentException.class, () -> search.binarySearch(new long[] {-10, 0, 5, 2, 3, 6}, 6));
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/tests/algorithm/search/SearchTestSuccessful.csv", numLinesToSkip = 1)
+    public void searchTestSuccessful(String array, String element, String expected) {
+        long[] inputArray = getInputArray(array);
+        long elementToSearch = Long.parseLong(element);
+        int expectedPosition = Integer.parseInt(expected);
+        int actualPosition = instance.binarySearch(inputArray, elementToSearch);
+
+        assertEquals(
+                expectedPosition, actualPosition,
+                "Expected position is - " + expectedPosition + " but it's - " + actualPosition + "."
+        );
     }
 }

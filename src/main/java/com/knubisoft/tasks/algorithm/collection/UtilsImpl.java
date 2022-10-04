@@ -25,7 +25,7 @@ public class UtilsImpl implements Utils {
         if (list1 == null || list2 == null) {
             throw new NullPointerException();
         }
-        //CollectionUtils.union(list1, list2); Another option to return a union
+
         return Stream.concat(list1.stream(), list2.stream()).collect(Collectors.toList());
     }
 
