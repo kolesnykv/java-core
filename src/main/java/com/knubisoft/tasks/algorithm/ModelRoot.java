@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TODO fix model
@@ -17,6 +19,7 @@ import java.util.List;
 public class ModelRoot {
 
     public List<Item> items;
+    public Set<String> set = new HashSet<>();
 
     public static class Batter {
         public String id;

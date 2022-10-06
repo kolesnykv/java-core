@@ -1,6 +1,8 @@
 package com.knubisoft.tasks.algorithm.collection;
 
+import com.knubisoft.tasks.algorithm.reflection.ConstructorUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ComparatorUtils;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -66,7 +68,10 @@ public class UtilsImpl implements Utils {
 
     @Override
     public <E> Comparator<E> chainedComparator(Comparator<E>... comparators) {
-        return null;
+        if (comparators == null) {
+            throw new IllegalArgumentException();
+        }
+        return ComparatorUtils.chainedComparator(comparators);
     }
 
     @Override
